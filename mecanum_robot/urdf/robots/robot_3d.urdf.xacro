@@ -1,0 +1,571 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_3d" xmlns:gz="http://gazebosim.org/schema">
+
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+
+    <xacro:arg name="robot_name" default="robot_3d"/>
+    <xacro:arg name="prefix" default=""/>
+    <xacro:arg name="use_gazebo" default="false"/>
+
+    <xacro:include filename="$(find mecanum_robot)/urdf/mech/robot_3d_base.urdf.xacro"/>
+    <xacro:include filename="$(find mecanum_robot)/urdf/mech/mecanum_wheel.urdf.xacro"/>
+    <xacro:include filename="$(find mecanum_robot)/urdf/sensors/rgbd_camera.urdf.xacro"/>
+    <!-- <xacro:include filename="$(find mecanum_robot)/urdf/sensors/lidar.urdf.xacro"/>
+    <xacro:include filename="$(find mecanum_robot)/urdf/sensors/imu.urdf.xacro"/> -->
+    <xacro:include filename="$(find mecanum_robot)/urdf/control/mec_mobile.gazebo"/>
+
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.76013710919286" />
+      <inertia
+        ixx="0.00423041439249349"
+        ixy="-2.31393934415601E-06"
+        ixz="-7.7385064447188E-05"
+        iyy="0.00452988705418676"
+        iyz="-1.77534456626722E-05"
+        izz="0.00785365615805233" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+    <!-- <xacro:robot_3d_base prefix="$(arg prefix)"/> -->
+
+    <xacro:mecanum_wheel
+      prefix="$(arg prefix)"
+      side="front_left"
+      x_reflect="1"
+      y_reflect="1"/>
+
+    <xacro:mecanum_wheel
+      prefix="$(arg prefix)"
+      side="front_right"
+      x_reflect="1"
+      y_reflect="-1"/>
+
+    <xacro:mecanum_wheel
+      prefix="$(arg prefix)"
+      side="back_left"
+      x_reflect="-1"
+      y_reflect="1"/>
+
+    <xacro:mecanum_wheel
+      prefix="$(arg prefix)"
+      side="back_right"
+      x_reflect="-1"
+      y_reflect="-1"/>
+
+
+    <!-- <xacro:rgbd_camera
+      prefix="$(arg prefix)"
+      camera_name="cam_1"
+      xyz_offset="0 0 0"
+      rpy_offset="0 0 0"/> -->
+
+    <!-- <xacro:lidar_sensor
+      prefix="$(arg prefix)"
+      parent="base_link"
+      frame_id="laser_frame"
+      xyz_offset="0 0 0.0825"
+      rpy_offset="0 0 3.14"
+      mesh_xyz_offset="0 0 0"
+      mesh_rpy_offset="${-M_PI/2} 0 0"
+      topic_name="scan"/> -->
+
+    <!-- <xacro:imu_sensor
+      prefix="$(arg prefix)"
+      parent="base_link"
+      frame_id="imu"
+      xyz_offset="0 0 0.006"
+      rpy_offset="0 0 0"
+      update_rate="15.0"
+      topic_name="imu/data"/> -->
+
+
+
+
+
+  <!-- <link
+    name="front_left_wheel_link">
+    <inertial>
+      <origin
+        xyz="1.70532499232934E-09 -0.0168295643833047 2.26295082088324E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887983184298" />
+      <inertia
+        ixx="0.000177613978336695"
+        ixy="1.37248860437883E-08"
+        ixz="1.11654566005799E-11"
+        iyy="0.00022365442780055"
+        iyz="-2.42751640075547E-10"
+        izz="0.000177545794209482" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/front_left_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/front_left_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.088786 0.12245 -0.047195"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_left_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="back_left_wheel_link">
+    <inertial>
+      <origin
+        xyz="-1.3230440076839E-09 -0.0368365137944612 -2.17248190992336E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887647953833" />
+      <inertia
+        ixx="0.000177613220943688"
+        ixy="1.36665667494309E-08"
+        ixz="-1.08793052465183E-12"
+        iyy="0.000223652061241406"
+        iyz="2.48477957519875E-10"
+        izz="0.000177544082207044" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/back_left_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/back_left_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.10619 0.14252 -0.050184"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_left_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="front_right_wheel_link">
+    <inertial>
+      <origin
+        xyz="7.14594161621562E-10 0.016769084340853 -2.17116463828437E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887661859866" />
+      <inertia
+        ixx="0.000177613248306299"
+        ixy="1.36706911035873E-08"
+        ixz="3.98381848061331E-12"
+        iyy="0.000223652076513665"
+        iyz="-2.4695149232585E-10"
+        izz="0.00017754411561144" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/front_right_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/front_right_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.088786 -0.12245 -0.047195"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_right_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="back_right_wheel_link">
+    <inertial>
+      <origin
+        xyz="2.26103836475922E-06 0.0169022372791197 -7.41275915649986E-10"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887990568828" />
+      <inertia
+        ixx="0.00017754580344094"
+        ixy="2.48572882265716E-10"
+        ixz="9.58023008288443E-12"
+        iyy="0.000223654436380607"
+        iyz="-1.37301058724468E-08"
+        izz="0.000177613999292661" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/back_right_wheel_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/back_right_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.106191117377807 -0.122520658695762 -0.050183577032114"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_right_wheel_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+   -->
+  
+  
+  
+  
+  
+  <link
+    name="3d_cam_link">
+    <inertial>
+      <origin
+        xyz="-0.0210006288187674 -0.00131588333827759 0.0218801921546786"
+        rpy="0 0 0" />
+      <mass
+        value="0.220446902729757" />
+      <inertia
+        ixx="0.00040464971483068"
+        ixy="2.27974817263347E-05"
+        ixz="-1.57137952728035E-07"
+        iyy="4.81765109037628E-05"
+        iyz="3.6158297393522E-07"
+        izz="0.000425228454437918" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/3d_cam_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/3d_cam_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="3d_cam_joint"
+    type="fixed">
+    <origin
+      xyz="0.086515 0.001395 0.065434"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="3d_cam_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <!-- <gazebo reference="front_right_wheel_link">
+      <surface>
+        <friction>
+          <ode>
+              <mu>1.0</mu>
+              <mu2>0.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+      <visual>
+          <material>
+              <ambient>0.2 0.2 0.2 1.0</ambient>
+              <diffuse>0.2 0.2 0.2 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+              <emissive>0.0 0.0 0.0 0.0</emissive>
+          </material>
+      </visual>
+  </gazebo>
+  <gazebo reference="back_right_wheel_link">
+      <surface>
+        <friction>
+          <ode>
+              <mu>1.0</mu>
+              <mu2>0.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+      <visual>
+          <material>
+              <ambient>0.2 0.2 0.2 1.0</ambient>
+              <diffuse>0.2 0.2 0.2 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+              <emissive>0.0 0.0 0.0 0.0</emissive>
+          </material>
+      </visual>
+  </gazebo>
+  <gazebo reference="front_left_wheel_link">
+      <surface>
+        <friction>
+          <ode>
+              <mu>1.0</mu>
+              <mu2>0.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+      <visual>
+          <material>
+              <ambient>0.2 0.2 0.2 1.0</ambient>
+              <diffuse>0.2 0.2 0.2 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+              <emissive>0.0 0.0 0.0 0.0</emissive>
+          </material>
+      </visual>
+  </gazebo>
+  <gazebo reference="back_left_wheel_link">
+      <surface>
+        <friction>
+          <ode>
+              <mu>1.0</mu>
+              <mu2>0.0</mu2>
+          </ode>
+        </friction>
+      </surface>
+      <visual>
+          <material>
+              <ambient>0.2 0.2 0.2 1.0</ambient>
+              <diffuse>0.2 0.2 0.2 1.0</diffuse>
+              <specular>0.2 0.2 0.2 1.0</specular>
+              <emissive>0.0 0.0 0.0 0.0</emissive>
+          </material>
+      </visual>
+  </gazebo> -->
+
+
+  <!-- 2.3 add Gazebo frictions -->
+  <gazebo reference='front_left_wheel_link'>
+   <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu>
+            <mu2>0.0</mu2>
+            <fdir1 gz:expressed_in="base_footprint">1 -1 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </gazebo>
+
+  <gazebo reference='back_left_wheel_link'>
+   <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu>
+            <mu2>0.0</mu2>
+            <fdir1 gz:expressed_in="base_footprint">1 1 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </gazebo>
+
+  <gazebo reference='front_right_wheel_link'>
+   <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu>
+            <mu2>0.0</mu2>
+            <fdir1 gz:expressed_in="base_footprint">1 1 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </gazebo>
+
+  <gazebo reference='back_right_wheel_link'>
+   <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.5</mu>
+            <mu2>0.0</mu2>
+            <fdir1 gz:expressed_in="base_footprint">1 -1 0</fdir1>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+  </gazebo>
+
+
+  <gazebo reference="base_link">
+    <mu1>0.000002</mu1>
+    <mu2>0.000002</mu2>
+    <!-- <material>Gazebo/Red</material> -->
+  </gazebo>
+
+      <!-- 2.5.1 Camera physical properties
+    <joint type="fixed" name="camera_joint">
+      <origin xyz="0.092 0 0.05" rpy="0 0 0"/>
+      <child link="camera_link"/>
+      <parent link="base_link"/>
+      <axis xyz="0 1 0" />
+    </joint>
+
+    <link name='camera_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia
+            ixx="1e-6" ixy="0" ixz="0"
+            iyy="1e-6" iyz="0"
+            izz="1e-6"/>
+      </inertial>
+
+      <collision name='collision'>
+        <origin xyz="0 0 0" rpy="0 0 0"/> 
+        <geometry>
+          <box size=".03 .03 .03"/>
+        </geometry>
+      </collision>
+
+      <visual name='camera_link_visual'>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size=".02 .02 .02"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <gazebo reference="camera_link">
+      <material>Gazebo/Red</material>
+    </gazebo>
+
+    <joint type="fixed" name="camera_optical_joint">
+      <origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/>
+      <child link="camera_link_optical"/>
+      <parent link="camera_link"/>
+    </joint>
+
+    <link name="camera_link_optical">
+    </link> -->
+    <!-- 2.5.1 End -->
+
+
+</robot>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="mecanum_urdf">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.0627906975242382 -0.000217819671821107 -0.00610852155898381"
+        rpy="0 0 0" />
+      <mass
+        value="1.76013710919286" />
+      <inertia
+        ixx="0.00423041439249349"
+        ixy="-2.31393934415601E-06"
+        ixz="-7.7385064447188E-05"
+        iyy="0.00452988705418676"
+        iyz="-1.77534456626722E-05"
+        izz="0.00785365615805233" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="wheel_fl_Link">
+    <inertial>
+      <origin
+        xyz="1.70532499232934E-09 -0.0168295643833047 2.26295082088324E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887983184298" />
+      <inertia
+        ixx="0.000177613978336695"
+        ixy="1.37248860437883E-08"
+        ixz="1.11654566005799E-11"
+        iyy="0.00022365442780055"
+        iyz="-2.42751640075547E-10"
+        izz="0.000177545794209482" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_fl_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_fl_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_fl_joint"
+    type="continuous">
+    <origin
+      xyz="0.088786 0.12245 -0.047195"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_fl_Link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="wheel_rl_Link">
+    <inertial>
+      <origin
+        xyz="-1.3230440076839E-09 -0.0368365137944612 -2.17248190992336E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887647953833" />
+      <inertia
+        ixx="0.000177613220943688"
+        ixy="1.36665667494309E-08"
+        ixz="-1.08793052465183E-12"
+        iyy="0.000223652061241406"
+        iyz="2.48477957519875E-10"
+        izz="0.000177544082207044" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_rl_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_rl_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_rl_joint"
+    type="continuous">
+    <origin
+      xyz="-0.10619 0.14252 -0.050184"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_rl_Link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="wheel_fr_Link">
+    <inertial>
+      <origin
+        xyz="7.14594161621562E-10 0.016769084340853 -2.17116463828437E-06"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887661859866" />
+      <inertia
+        ixx="0.000177613248306299"
+        ixy="1.36706911035873E-08"
+        ixz="3.98381848061331E-12"
+        iyy="0.000223652076513665"
+        iyz="-2.4695149232585E-10"
+        izz="0.00017754411561144" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_fr_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_fr_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_fr_joint"
+    type="continuous">
+    <origin
+      xyz="0.088786 -0.12245 -0.047195"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_fr_Link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="wheel_rr_Link">
+    <inertial>
+      <origin
+        xyz="2.26103836475922E-06 0.0169022372791197 -7.41275915649986E-10"
+        rpy="0 0 0" />
+      <mass
+        value="1.02887990568828" />
+      <inertia
+        ixx="0.00017754580344094"
+        ixy="2.48572882265716E-10"
+        ixz="9.58023008288443E-12"
+        iyy="0.000223654436380607"
+        iyz="-1.37301058724468E-08"
+        izz="0.000177613999292661" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_rr_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/wheel_rr_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="wheel_rr_joint"
+    type="continuous">
+    <origin
+      xyz="-0.106191117377807 -0.122520658695762 -0.050183577032114"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_rr_Link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="3d_cam_Link">
+    <inertial>
+      <origin
+        xyz="-0.0210006288187674 -0.00131588333827759 0.0218801921546786"
+        rpy="0 0 0" />
+      <mass
+        value="0.220446902729757" />
+      <inertia
+        ixx="0.00040464971483068"
+        ixy="2.27974817263347E-05"
+        ixz="-1.57137952728035E-07"
+        iyy="4.81765109037628E-05"
+        iyz="3.6158297393522E-07"
+        izz="0.000425228454437918" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/3d_cam_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find mecanum_robot)/meshes/3d_cam_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="3d_cam_joint"
+    type="fixed">
+    <origin
+      xyz="0.086515 0.001395 0.065434"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="3d_cam_Link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+</robot>
