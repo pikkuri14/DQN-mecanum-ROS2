@@ -1,0 +1,3 @@
+[submodule "mec_mobile"]
+	path = mec_mobile
+	url = https://github.com/roboticslabs/mec_mobile.git
